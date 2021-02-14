@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% extends 'blog/base.html' %}
+
+{% block body_block %}
+
+<div class="jumbotron">
+	<h2>Please login:</h2>
+	<h3>You Must be a superuser</h3>
+</div>
+
+{% if form.errors %}
+
+    <p>Your username and password didn't match, please try again!</p>
+
+{% endif %}
+
+<form action="{% url 'login' %}" method="POST">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<input type="submit" class="btn btn-primary" value="Login">
+	<!-- We type this because of line 24 in the urls of the project -->
+	<input type="hidden" name="next" value="{{next}}">
+
+
+</form>
+
+{% endblock %}
